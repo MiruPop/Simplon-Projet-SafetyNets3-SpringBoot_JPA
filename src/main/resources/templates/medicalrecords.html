@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Safety Net</title>
+<title>Safety Net - Dossiers médicaux</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/superhero/bootstrap.min.css"
 	integrity="sha384-HnTY+mLT0stQlOwD3wcAzSVAZbrBp141qwfR4WfTqVQKSgmcgzk+oP0ieIyrxiFO"
@@ -22,39 +23,32 @@
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="nav nav-tabs">
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
-						href="#home">Home</a></li>
+						href="/home">Home</a></li>
 
-					<li class="nav-item"><a class="nav-link active" href="/person">Personnes</a></li>
+					<li class="nav-item"><a class="nav-link" href="/person">Personnes</a></li>
 					<li class="nav-item"><a class="nav-link" href="/firestation">Casernes
 							pompiers</a></li>
-					<li class="nav-item"><a class="nav-link" href="/medrecords">Dossiers
+					<li class="nav-item"><a class="nav-link active" href="/medrecords">Dossiers
 							médicaux</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<br>
-	<div class="d-grid gap-2">
-		<a class="nav-link active" href="/nouvellePersonne"><button
-				class="btn btn-lg btn-primary" type="button">Ajouter
-				nouvelle personne</button></a>
-	</div>
+
 
 	<br>
-	<h3 class="text-center">Liste des personnes</h3>
+	<h3 class="text-center">Dossiers médicaux</h3>
 	<br>
-
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Nom</th>
 				<th>Prenom</th>
-				<th>Adresse</th>
-				<th>Zip, City</th>
-				<!--				<th>Zip</th> -->
-				<th>Téléphone</th>
-				<th>Email</th>
-				<th>Action</th>
+				<th>Date de naissance</th>
+				<th>Médication</th>
+				<th>Allergies</th>
+				<th>Modifier</th>
+				<th>Effacer</th>
 			</tr>
 		</thead>
 		<tbody th:each="person : ${listePersonnes}">

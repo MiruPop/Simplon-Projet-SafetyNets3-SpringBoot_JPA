@@ -9,39 +9,54 @@
 	crossorigin="anonymous">
 </head>
 <body>
-
-<form action="#" th:action="@{/updatePerson/{id}(id=${person.id})}"
-	th:object="${person}" method="post">
-				<label for="lastName">Nom</label>
-				<input type="text" th:field="*{lastName}" id="lastName">
-				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-				
-				<label for="firstName">Prénom</label>
-				<input type="text" th:field="*{firstName}" id="firstName">
-				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-				
-				<label for= "address">Adresse</label>
-				<input type="text" th:field="*{address}">
-				<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
-
-				<label for= "zip">Code postal</label>
-				<input type="text" th:field="*{zip}">
-				<span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span>
-
-				<label for= "city">Ville</label>
-				<input type="text" th:field="*{city}">
-				<span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
-
-				<label for= "phone">Téléphone</label>
-				<input type="text" th:field="*{phone}">
-				<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-
-				<label for= "email">Email</label>
-				<input type="text" th:field="*{email}" />
-				<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-
-		<button class="btn btn-primary" type="submit">Mettre à jour</button>
-	</form>
+	<div class="container col-md-5">
+		<div class="card">
+			<div class="card-body">
+				<form action="#" th:action="@{/updatePerson/{id}(id=${person.id})}"
+				th:object="${person}" method="post">
+					<h3>Ajouter une nouvelle personne</h3>
+					<fieldset>
+						<div class="mb-3">
+							<label for="lastName">Nom</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{lastName}"
+							id="lastName" placeholder="DUPONT">
+							<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+					
+							<label for="firstName">Prénom</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{firstName}"
+							id="firstName" placeholder="Toto">
+							<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
 	
+							<label for="address">Adresse</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{address}"
+							id="address" placeholder="123 rue Blanche">
+							<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+	
+							<label for="zip">Code postal</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{zip}"
+							id="zip" placeholder="75001">
+							<span th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></span>
+	
+							<label for="city">Ville</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{city}"
+							id="city" placeholder="Paris">
+							<span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+	
+							<label for="phone">Téléphone</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{phone}"
+							id="phone" placeholder="01 23 45 67 89">
+							<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+					
+							<label for="email">Email</label>
+							<input type="text" class="form-control form-control-sm" th:field="*{email}"
+							id="email" placeholder="adresse@mail.com">
+							<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+						</div>
+					</fieldset>
+					<input type="submit" class="btn btn-primary" value="Ajouter Personne">
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

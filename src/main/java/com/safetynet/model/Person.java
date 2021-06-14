@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Person {
@@ -13,10 +14,13 @@ public class Person {
     @Column(name="person_id")
     private Long id;
     @Column(name="firstName")
+	@NotBlank (message = "Merci de saisir un prénom")
     private String firstName;
     @Column(name= "lastName")
+    @NotBlank (message = "Merci de saisir un nom")
     private String lastName;
     @Column(name="address")
+    @NotBlank (message = "Merci de saisir une adresse")
     private String address;
     @Column(name="city")
     private String city;
@@ -105,6 +109,6 @@ public class Person {
 	@Override
 	public String toString() {
 		return firstName +" "+ lastName.toUpperCase() + ", " + address + ", city: "+ zip +" "+ city
-				+ ", phone: " + phone + ", email: " + email;
+				+ ", phone: ";
 	}
 }

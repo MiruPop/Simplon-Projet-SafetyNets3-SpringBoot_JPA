@@ -58,13 +58,16 @@ public class PersonService {
 	}
 //	
 //
-//	public Persons getByFullName(String firstName, String lastName) {
+//	public Map<Person,MedicalRecord> getMedRecord(String firstName, String lastName) {
 //		Persons unePersonne = new Persons();
+	//décla nouvelle map
 //
 //		for (Persons p : DataJson.persons) {
 //			if (p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)) {
 //				unePersonne.setFirstName(p.getFirstName());
 //				unePersonne.setLastName(p.getLastName());
+		// if (medRecord.getFirstName().equals(unePersonne.getFirstName() && medRecord.getLastName().equals(unePersonne.getLastName()) {
+		//	nouvelle map.put
 //				unePersonne.setAddress(p.getCity());
 //				unePersonne.setZip(p.getZip());
 //				unePersonne.setCity(p.getCity());

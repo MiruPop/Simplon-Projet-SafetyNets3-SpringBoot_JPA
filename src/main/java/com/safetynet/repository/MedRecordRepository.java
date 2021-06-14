@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.safetynet.model.MedRecord;
 
-public interface MedRecordRepository extends JpaRepository<MedRecord, Integer> {
-	MedRecord getById(Long id);
+public interface MedRecordRepository extends JpaRepository<MedRecord, Long> {
+
 }

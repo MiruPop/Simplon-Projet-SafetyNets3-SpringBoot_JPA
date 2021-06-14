@@ -2,8 +2,8 @@ package com.safetynet.utility;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,15 +39,15 @@ public class JsonDataParser {
 	@Autowired
 	FirestationRepository fsr;
 
-// les 3 listes sont déclarés "static" pour permettre l'accès depuis toutes les autres classes
-	public static List<Person> listePersonnes = new ArrayList<>();
-	public static List<MedRecord> listeMedRecords = new ArrayList<>();
-	public static List<Firestation> listeFirestations = new ArrayList<>();
+// j'ai changé l'utilisation initiale de "List" en "HashSet" en m'apercevant qu'il y avait des doublons dans le data.json
+	// il y a également des "erreurs de saisies": ex: l'adresse "112 Steppes Pl" est référencée par 2 casernes différentes
+	public static Set<Person> listePersonnes = new HashSet<>();
+	public static Set<MedRecord> listeMedRecords = new HashSet<>();
+	public static Set<Firestation> listeFirestations = new HashSet<>();
 
 	ObjectMapper mapper = new ObjectMapper();
 
-// @EventListener permet le remplissage des 3 listes dès le démarrage de l'application
-// Ainsi, on simule une "persistance" des données tant que l'application tourne
+// @EventListener permet la création des tables et leur remplissage au démarrage de l'application
 
 	@EventListener
 	public void readPersons(ApplicationReadyEvent event) {
@@ -56,14 +56,14 @@ public class JsonDataParser {
 														// le mappage des données (DRY)
 			String arrayString = jsonNode.get("persons").toString();
 
-			listePersonnes = mapper.readValue(arrayString, new TypeReference<List<Person>>() {
+			listePersonnes = mapper.readValue(arrayString, new TypeReference<Set<Person>>() {
 			});
 //listePersonnes = mapper.readValue(file, DataJson.class).getPersons();
 			if (pr.findAll().isEmpty()) {
 				pr.saveAll(listePersonnes);
 				LOGGER.info("Table personnes peuplée!");
 			} else
-				LOGGER.info("La table personnes été déjà peuplée!");
+				LOGGER.info("La table \"personnes\" était déjà peuplée!");
 		} catch (IOException e) {
 			LOGGER.info("FAIL TO READ personnes", e);
 		}
@@ -76,7 +76,7 @@ public class JsonDataParser {
 			JsonNode jsonNode = mapper.readTree(file);
 			String arrayString = jsonNode.get("medicalrecords").toString();
 
-			listeMedRecords = mapper.readValue(arrayString, new TypeReference<List<MedRecord>>() {
+			listeMedRecords = mapper.readValue(arrayString, new TypeReference<Set<MedRecord>>() {
 			});
 			System.out.println(listeMedRecords);
 
@@ -84,7 +84,7 @@ public class JsonDataParser {
 			mrr.saveAll(listeMedRecords);
 			LOGGER.info("Liste dossiers médicaux peuplée!");
 			} else
-				LOGGER.info("La table dossiers médicaux a été déjà peuplée!");
+				LOGGER.info("La table \"dossiers médicaux\" était déjà peuplée!");
 		} catch (IOException e) {
 			LOGGER.info("FAIL TO READ dossiers médicaux", e);
 		}
@@ -96,13 +96,13 @@ public class JsonDataParser {
 			JsonNode jsonNode = mapper.readTree(file);
 			String arrayString = jsonNode.get("firestations").toString();
 
-			listeFirestations = mapper.readValue(arrayString, new TypeReference<List<Firestation>>() {
+			listeFirestations = mapper.readValue(arrayString, new TypeReference<Set<Firestation>>() {
 			});
 			if (fsr.findAll().isEmpty()) {
 				fsr.saveAll(listeFirestations);
 				LOGGER.info("Table casernes peuplée!");
 			} else
-				LOGGER.info("La table firestation été déjà peuplée!");
+				LOGGER.info("La table \"firestation\" était déjà peuplée!");
 
 		} catch (IOException e) {
 			LOGGER.info("FAIL TO READ Liste  casernes", e);

@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Safety Net</title>
+<title>Safety Net - Casernes pompiers</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/superhero/bootstrap.min.css"
 	integrity="sha384-HnTY+mLT0stQlOwD3wcAzSVAZbrBp141qwfR4WfTqVQKSgmcgzk+oP0ieIyrxiFO"
@@ -17,39 +18,55 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
+
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link"
-						data-bs-toggle="tab" href="#home">Home</a></li>
-					<li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
-						href="/person">Personnes</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/firestation">Casernes pompiers</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="/medrecords">Dossiers médicaux</a></li>
+					<li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
+						href="/home">Home</a></li>
+
+					<li class="nav-item"><a class="nav-link" href="/person">Personnes</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/firestation">Casernes
+							pompiers</a></li>
+					<li class="nav-item"><a class="nav-link" href="/medrecords">Dossiers
+							médicaux</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	
+	<br>
+	<div class="d-grid gap-2">
+		<a class="nav-link active" href="/newFirestation"><button
+				class="btn btn-lg btn-primary" type="button">Ajouter
+				nouvelle caserne</button></a>
+	</div>
+	
+	<br>
+	<h3 class="text-center">Casernes de pompiers</h3>
+	<br>
 
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Numéro de caserne</th>
 				<th>Adresse désservie</th>
+				<th>Modifier</th>
+				<th>Effacer</th>
 			</tr>
 		</thead>
-		<tbody th:each="f : ${personInfo}">
+		<tbody th:each="firestation : ${listeCasernes}">
 			<tr class="table-secondary">
-				<td th:text="${p.lastName}"></td>
-				<td th:text="${p.firstName}"></td>
-				<td th:text="${p.address}"></td>
- 				<td th:text="${#strings.listJoin({p.zip, p.city}, ' ')}"></td>
-<!--				<td th:text="${p.zip}"></td> -->
-				<td th:text="${p.phone}"></td>
-				<td th:text="${p.email}"></td>
+				<td th:text="${firestation.station}"></td>
+				<td th:text="${firestation.address}"></td>
+				<td><a th:href="@{/editFirestation/{id}(id = ${firestation.id})}"><span
+						class="iconify" data-icon="la:pen-fancy" data-inline="false"></span></a></td>
+				<td><a th:href="@{/deleteFirestation/{id}(id = ${firestation.id})}"><span
+						class="iconify" data-icon="entypo:trash" data-inline="false"></span></a></td>
 			</tr>
 		</tbody>
 	</table>
+	
+	<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 </body>
 </html>

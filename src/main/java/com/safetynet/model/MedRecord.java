@@ -23,11 +23,10 @@ public class MedRecord {
 	private String birthdate;
 	
 	@ElementCollection
-	@Column(name="medications")
 	private List<String> medications;
 	
 	@ElementCollection
-	@Column(name="allergies")
+//	@Column(name="allergies")
 	private List<String> allergies;
 
 	public MedRecord() {
