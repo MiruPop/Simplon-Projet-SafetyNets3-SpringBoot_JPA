@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SafetyNet - Fiche caserne</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/superhero/bootstrap.min.css"
+	integrity="sha384-HnTY+mLT0stQlOwD3wcAzSVAZbrBp141qwfR4WfTqVQKSgmcgzk+oP0ieIyrxiFO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container col-md-5">
+		<div class="card">
+			<div class="card-body">
+				<form action="#"
+					th:action="@{/updateFirestation/{id}(id=${firestation.id})}"
+					th:object="${firestation}" method="post">
+					<h3>Modifier les informations</h3>
+					<fieldset>
+						<div class="mb-3">
+
+							<label for="station">Numéro station</label>
+							<input type="text" class="form-control" th:field="*{station}" id="station">
+							<span th:if="${#fields.hasErrors('station')}" th:errors="*{station}"></span>
+							
+							<label for="address">Adresse</label>
+							<input type="text" class="form-control" th:field="*{address}" id="firstName">
+							<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+						</div>
+					</fieldset>
+					<button class="btn btn-primary" type="submit">Mettre à jour</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

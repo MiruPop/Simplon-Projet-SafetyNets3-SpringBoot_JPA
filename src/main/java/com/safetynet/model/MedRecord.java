@@ -9,24 +9,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+//@JsonIgnoreProperties(ignoreUnknown = true)		//permet d'ignorer les champs de data.json qui ne correspondent pas aux attributs du bean
 public class MedRecord {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="medRec_id")
+    @Column(name="id")
 	private Long id;
+
+//	@Column(name="person_id", FK.. bdd Person
+
+			
+//	@OneToOne(mappedBy="firstName")
+//	@JoinColumn(name="firstName")
 	@Column(name="firstName")
 	private String firstName;
+	
+//	@OneToOne(mappedBy="lastName")
+//	@JoinColumn(name="lastName")
 	@Column(name="lastName")
 	private String lastName;
+	
+	
 	@Column(name="birthDate")
 	private String birthdate;
 	
+	//alternative: @OneToMany + @Embedded; surtout intéressant si c'était une List d'objets, avec plusieurs attributs
 	@ElementCollection
 	private List<String> medications;
 	
 	@ElementCollection
-//	@Column(name="allergies")
 	private List<String> allergies;
 
 	public MedRecord() {
@@ -81,7 +95,7 @@ public class MedRecord {
 
 	@Override
 	public String toString() {
-		return "Dossier medical de: " + firstName + " " + lastName + ", né(e) le: " + birthdate + ", médication: "
-				+ medications + ", allergies connues: " + allergies + ";";
+		return "MedRecord [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthdate="
+				+ birthdate + ", medications=" + medications + ", allergies=" + allergies + "]";
 	}
 }

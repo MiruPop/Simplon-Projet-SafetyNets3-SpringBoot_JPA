@@ -16,13 +16,10 @@ import com.safetynet.repository.FirestationRepository;
 @Controller
 public class FirestationController {
 
+	@Autowired
 	private FirestationRepository firestationRepository;
 	
-	@Autowired
-	public FirestationController(FirestationRepository firestationRepository) {
-        this.firestationRepository = firestationRepository;
-    }
-	
+
 //	READ
 	   
 	@GetMapping ("/firestation")
@@ -37,12 +34,12 @@ public class FirestationController {
         return "registerFirestation";
     }
     @PostMapping("/addFirestation")
-    public String ajouterPersonne(@Valid Firestation firestation, BindingResult result, Model model) {
+    public String ajouterCaserne(@Valid Firestation firestation, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "registerFirestation";
         }
         firestationRepository.save(firestation);
-        return "redirect:/person";
+        return "redirect:/firestation";
     }
 	
 //	UPDATE
@@ -67,7 +64,7 @@ public class FirestationController {
 	
 //	DELETE
 	@GetMapping("/deleteFirestation/{id}")
-	public String deleteUser(@PathVariable("id") Long id, Model model) {
+	public String deleteStation(@PathVariable("id") Long id, Model model) {
 		Firestation firestation = firestationRepository.findById(id)
 	      .orElseThrow(() -> new IllegalArgumentException("L'id recherché n'existe pas : " + id));
 		firestationRepository.delete(firestation);

@@ -5,23 +5,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+
+
 
 @Entity
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Person {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)		//AUTO laisse Hibernate chosir la meilleure stratégie de génération de l'id unique
-    @Column(name="person_id")
+    @Column(name="id")
     private Long id;
+	
+//	@OneToOne
+//	@JoinColumn(name="firstName",referencedColumnName = "MedRecord_firstName")
     @Column(name="firstName")
-	@NotBlank (message = "Merci de saisir un prénom")
+//	@NotBlank (message = "Merci de saisir un prénom")
     private String firstName;
+	
+//	@OneToOne
+//	@JoinColumn(name="lastName",referencedColumnName = "MedRecord_lastName")
     @Column(name= "lastName")
-    @NotBlank (message = "Merci de saisir un nom")
+//    @NotBlank (message = "Merci de saisir un nom")
     private String lastName;
+    
     @Column(name="address")
-    @NotBlank (message = "Merci de saisir une adresse")
+//    @NotBlank (message = "Merci de saisir une adresse")
     private String address;
+    
     @Column(name="city")
     private String city;
     @Column(name="zip")
@@ -31,9 +41,22 @@ public class Person {
     @Column(name="email")
     private String email;
     
+//    @ManyToOne
+//    private Firestation firestation;
+//    @OneToOne
+//    private MedRecord medRecord;
+    
 // la norme JPA requiert un constructeur vide pour les entités
 	public Person() {
 	}
+
+//	public Firestation getFirestation() {
+//		return firestation;
+//	}
+//
+//	public void setFirestation(Firestation firestation) {
+//		this.firestation = firestation;
+//	}
 
 
 	/*
@@ -73,7 +96,7 @@ public class Person {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	
 	public String getCity() {
 		return city;
 	}
@@ -108,7 +131,9 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return firstName +" "+ lastName.toUpperCase() + ", " + address + ", city: "+ zip +" "+ city
-				+ ", phone: ";
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
+				+ ", city=" + city + ", zip=" + zip + ", phone=" + phone + ", email=" + email + "]";
 	}
+	
+
 }

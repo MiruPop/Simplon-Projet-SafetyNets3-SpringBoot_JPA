@@ -49,26 +49,6 @@ public class JsonDataParser {
 
 // @EventListener permet la création des tables et leur remplissage au démarrage de l'application
 
-	@EventListener
-	public void readPersons(ApplicationReadyEvent event) {
-		try {
-			JsonNode jsonNode = mapper.readTree(file); // A FAIRE: trouver un moyen pour sortir en dehors des methodes
-														// le mappage des données (DRY)
-			String arrayString = jsonNode.get("persons").toString();
-
-			listePersonnes = mapper.readValue(arrayString, new TypeReference<Set<Person>>() {
-			});
-//listePersonnes = mapper.readValue(file, DataJson.class).getPersons();
-			if (pr.findAll().isEmpty()) {
-				pr.saveAll(listePersonnes);
-				LOGGER.info("Table personnes peuplée!");
-			} else
-				LOGGER.info("La table \"personnes\" était déjà peuplée!");
-		} catch (IOException e) {
-			LOGGER.info("FAIL TO READ personnes", e);
-		}
-
-	}
 
 	@EventListener
 	public void readMedRecords(ApplicationReadyEvent event) {
@@ -89,7 +69,7 @@ public class JsonDataParser {
 			LOGGER.info("FAIL TO READ dossiers médicaux", e);
 		}
 	}
-
+	
 	@EventListener
 	public void readFirestations(ApplicationReadyEvent event) {
 		try {
@@ -107,5 +87,26 @@ public class JsonDataParser {
 		} catch (IOException e) {
 			LOGGER.info("FAIL TO READ Liste  casernes", e);
 		}
+	}
+	
+	@EventListener
+	public void readPersons(ApplicationReadyEvent event) {
+		try {
+			JsonNode jsonNode = mapper.readTree(file); // A FAIRE: trouver un moyen pour sortir en dehors des methodes
+														// le mappage des données (DRY)
+			String arrayString = jsonNode.get("persons").toString();
+
+			listePersonnes = mapper.readValue(arrayString, new TypeReference<Set<Person>>() {
+			});
+//listePersonnes = mapper.readValue(file, DataJson.class).getPersons();
+			if (pr.findAll().isEmpty()) {
+				pr.saveAll(listePersonnes);
+				LOGGER.info("Table personnes peuplée!");
+			} else
+				LOGGER.info("La table \"personnes\" était déjà peuplée!");
+		} catch (IOException e) {
+			LOGGER.info("FAIL TO READ personnes", e);
+		}
+
 	}
 }

@@ -11,16 +11,16 @@ import javax.persistence.Id;
 public class Firestation {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="firestation_id")
 	private Long id;
-	
-	//à la place de la Column "address"
-	//@ManyToOne @JoinColumn(name="address")
-	//private Person person
 	@Column(name="address")
 	private String address;
 	@Column(name="station")
 	private String station;
+	
+	
+//	@OneToMany(mappedBy="firestation")
+//    private Set<Person> personnes;
+
 
 	public String getAddress() {
 		//faudrait peut-être ajouter Person person dans attributs
@@ -43,13 +43,16 @@ public class Firestation {
 		this.address = address;
 	}
 
+
 	public String getStation() {
 		return station;
 	}
 
+
 	public void setStation(String station) {
 		this.station = station;
 	}
+
 
 	@Override
 	public String toString() {

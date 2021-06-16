@@ -18,12 +18,10 @@ import com.safetynet.repository.PersonRepository;
 @Controller
 public class PersonController {
 	
+	@Autowired
 	private PersonRepository personRepository;
 
-	   @Autowired
-	    public PersonController(PersonRepository personRepository) {
-	        this.personRepository = personRepository;
-	    }
+
 
 //	READ
 	   
@@ -57,7 +55,7 @@ public class PersonController {
         return "fichePersonne";
     }
     @PostMapping("/updatePerson/{id}")
-    public String modifierPersonne(@PathVariable("id") long id, @Valid Person p, 
+    public String modifierPersonne(@PathVariable("id") Long id, @Valid Person p, 
       BindingResult result, Model model) {
         if (result.hasErrors()) {
             p.setId(id);

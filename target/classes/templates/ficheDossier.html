@@ -1,0 +1,49 @@
+				
+
+				<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Safety Net - Nouveau dossier</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/superhero/bootstrap.min.css"
+	integrity="sha384-HnTY+mLT0stQlOwD3wcAzSVAZbrBp141qwfR4WfTqVQKSgmcgzk+oP0ieIyrxiFO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container col-md-5">
+		<div class="card">
+			<div class="card-body">
+				<form th:action="@{/updateMedrecord/{id}(id=${medRecord.id})}" th:object="${medRecord}" method="post">
+				<h3>Modifier dossier</h3>
+		<fieldset>
+			<div class="mb-3">
+				<label for="lastName">Nom</label>
+				<input type="text" class="form-control form-control-sm" th:field="*{lastName}"
+				id="lastName" placeholder="DUPONT">
+				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+				
+				<label for="firstName">Prénom</label>
+				<input type="text" class="form-control form-control-sm" th:field="*{firstName}"
+				id="firstName" placeholder="Toto">
+				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+
+				<label for="birthdate">Date de naissance</label>
+				<input type="text" class="form-control form-control-sm" th:field="*{birthdate}"
+				id="birthdate" placeholder="01/01/1999">
+				<span th:if="${#fields.hasErrors('birthdate')}" th:errors="*{}"></span>
+	
+				<label for="medications">Médications</label>
+				<input type="text" th:each="medication : ${medRecord.medications}" class="form-control form-control-sm">
+	
+				<label for="city">Allergies</label>
+  				<input type="text" th:each="allergy : ${medRecord.allergies}" class="form-control form-control-sm">
+			</div>
+		</fieldset>
+		<input type="submit" class="btn btn-primary" value="Sauvegarder">
+	</form>
+	</div>
+	</div>
+	</div>
+</body>
+</html>
