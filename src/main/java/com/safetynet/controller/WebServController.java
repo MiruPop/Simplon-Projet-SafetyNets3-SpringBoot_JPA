@@ -26,12 +26,24 @@ public class WebServController {
 //	http://localhost:8080/firestationCount?station=<station_number>
 	@GetMapping("/firestationCount")
 	public Map<String,Object> getPersonsAndCountByAge_ByFirestationNumber(@RequestParam String station) {
-		return ws.getPersonsByFirestationNumber(station);
+		return ws.getPersonsAndCountByFirestation(station);
 	}
 	
 //	http://localhost:8080/childAlert?address=<address>
 	@GetMapping("/childAlert")
 	public Map<String,Object> getChildrenAndTheirFamilyMembersByAddress(@RequestParam String address) {
 		return ws.getChildrenAndFamilyMembersByAddress(address);
+	}
+	
+//	http://localhost:8080/phoneAlert?firestation=<firestation_number>
+	@GetMapping("phoneAlert")
+	public List<String> getPersonsPhonesByFirestationNumber(@RequestParam String firestation) {
+		return ws.getPersonsPhonesByFirestationNumber(firestation);
+	}
+	
+//	http://localhost:8080/fire?address=<address>
+	@GetMapping("fire")
+	public Map<String,Object> getPersonsInfoPlusMedical_ByAddress(@RequestParam String address) {
+		return ws.getPersonsInfoAndStationByAddress(address);
 	}
 }

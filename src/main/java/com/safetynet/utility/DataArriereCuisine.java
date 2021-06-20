@@ -44,6 +44,7 @@ public class DataArriereCuisine {
 		return null;
 	}
 	
+
 	public String getPersonBirthDate(Person p) {
 		List <MedRecord> listeDossiersMedicaux = medRecRepo.findAll();
 		for(MedRecord medicalRecord: listeDossiersMedicaux) {
@@ -78,7 +79,6 @@ public class DataArriereCuisine {
 	public List<Person> getPersonsServedByFirestation(String station) {
 //		je peuple une liste d'adresses par caserne, en utilisant la méthode antérieurement définie 
 		List<String> addresses = this.getAddressesByFirestationNumber(station);
-		System.out.println(addresses);
 		List<Person> listePersonnes = new ArrayList<>();
 		for (Person person : personRepo.findAll()) {
 			for (String address : addresses) {
@@ -90,25 +90,25 @@ public class DataArriereCuisine {
 		return listePersonnes;
 	}
 
-	public List<Person> getAllPersonsByAddress(String address) {
-		List<Person> persons = new ArrayList<>();
-		for (Person person : personRepo.findAll()) {
-			if(person.getAddress().equals(address)) {
-				persons.add(person);
-			}
-		}
-		return persons;
-	}
-	
-	public List<Person> getChildrenByAddress(String address) {
-		List<Person> childrenInHousehold = new ArrayList<>();
-		for (Person person : personRepo.findAll()) {
-			if(person.getAddress().equals(address)) {
-				if(this.getPersonAge(person)<=18) {
-					childrenInHousehold.add(person);
-				}
-			}
-		}
-		return childrenInHousehold;
-	}
+//	public List<Person> getAllPersonsByAddress(String address) {
+//		List<Person> persons = new ArrayList<>();
+//		for (Person person : personRepo.findAll()) {
+//			if(person.getAddress().equals(address)) {
+//				persons.add(person);
+//			}
+//		}
+//		return persons;
+//	}
+//	
+//	public List<Person> getChildrenByAddress(String address) {
+//		List<Person> childrenInHousehold = new ArrayList<>();
+//		for (Person person : personRepo.findAll()) {
+//			if(person.getAddress().equals(address)) {
+//				if(this.getPersonAge(person)<=18) {
+//					childrenInHousehold.add(person);
+//				}
+//			}
+//		}
+//		return childrenInHousehold;
+//	}
 }
