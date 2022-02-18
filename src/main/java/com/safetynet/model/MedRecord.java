@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,15 +26,18 @@ public class MedRecord {
 //	@OneToOne(mappedBy="firstName")
 //	@JoinColumn(name="firstName")
 	@Column(name="firstName")
+	@NotBlank (message = "Merci de saisir un prénom")
 	private String firstName;
 	
 //	@OneToOne(mappedBy="lastName")
 //	@JoinColumn(name="lastName")
 	@Column(name="lastName")
+	@NotBlank (message = "Merci de saisir un nom")
 	private String lastName;
 	
 	
 	@Column(name="birthDate")
+	@NotBlank
 	private String birthdate;
 	
 	//alternative: @OneToMany + @Embedded; surtout intéressant si c'était une List d'objets, avec plusieurs attributs

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 // cette classe doit etre une join table qui lie chaque adresse avec un numéro de caserne
 @Entity
@@ -13,6 +14,7 @@ public class Firestation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name="address")
+	@NotBlank(message = "Merci de saisir une adresse")
 	private String address;
 	@Column(name="station")
 	private String station;
